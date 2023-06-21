@@ -1,0 +1,39 @@
+{
+  "availability-zones:account=351032530776:region=eu-central-1": [
+    "eu-central-1a",
+    "eu-central-1b",
+    "eu-central-1c"
+  ],
+  "ami:account=351032530776:filters.image-type.0=machine:filters.name.0=amzn2-ami-hvm-2.0.20211001.1-x86_64-gp2:filters.state.0=available:region=eu-central-1": "ami-058e6df85cfc7760b",
+  "acknowledged-issue-numbers": [
+    19836,
+    21138
+  ],
+  "availability-zones:account=476690629719:region=eu-central-1": [
+    "eu-central-1a",
+    "eu-central-1b",
+    "eu-central-1c"
+  ],
+  "ami:account=476690629719:filters.image-type.0=machine:filters.name.0=amzn2-ami-hvm-2.0.20211001.1-x86_64-gp2:filters.state.0=available:region=eu-central-1": "ami-058e6df85cfc7760b",
+  "availability-zones:account=476690629719:region=eu-west-2": [
+    "eu-west-2a",
+    "eu-west-2b",
+    "eu-west-2c"
+  ],
+  "ami:account=476690629719:filters.image-type.0=machine:filters.name.0=amzn2-ami-hvm-2.0.20211001.1-x86_64-gp2:filters.state.0=available:region=eu-west-2": "ami-02f5781cba46a5e8a",
+  "availability-zones:account=757702843546:region=eu-central-1": [
+    "eu-central-1a",
+    "eu-central-1b",
+    "eu-central-1c"
+  ],
+  "ami:account=757702843546:filters.image-type.0=machine:filters.name.0=amzn2-ami-hvm-2.0.20211001.1-x86_64-gp2:filters.state.0=available:region=eu-central-1": "ami-058e6df85cfc7760b",
+  "availability-zones:account=757702843546:region=us-east-1": [
+    "us-east-1a",
+    "us-east-1b",
+    "us-east-1c",
+    "us-east-1d",
+    "us-east-1e",
+    "us-east-1f"
+  ],
+  "ami:account=757702843546:filters.image-type.0=machine:filters.name.0=amzn2-ami-hvm-2.0.20211001.1-x86_64-gp2:filters.state.0=available:region=us-east-1": "ami-02e136e904f3da870"
+}

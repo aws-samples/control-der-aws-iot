@@ -1,0 +1,50 @@
+REGION=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/\(.*\)[a-z]/\1/')
+LOG="/tmp/boot-log.txt"
+SIMLOG="/tmp/simulator-log.txt"
+cd /tmp
+
+######INSTALLATION OF THE MODBUS SIMULATOR
+
+echo "Starting simulator script parallel log" >> $LOG
+
+yum update -y
+sudo yum install -y jq
+
+#Install Modbus simulator
+echo "Downloading modbus simulator" >> $LOG
+
+REGION=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone | sed 's/\(.*\)[a-z]/\1/')
+
+s3File=$(aws ssm get-parameter --name modbusSimulatorPath --region $REGION --query "Parameter.Value" --output text)
+aws s3 cp $s3File diagslave.tgz
+tar xzf diagslave.tgz
+export PATH=$PWD/diagslave/x86_64-linux-gnu:$PATH
+
+echo "Modbus simulator installation completed" >> $LOG
+
+######GGv2 INSTALLATION 
+
+cd /tmp
+
+pip3 install boto3
+sudo yum install -y jq
+
+ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
+
+TEMP_CREDENTIALS=$(aws sts assume-role --role-arn "arn:aws:iam::$ACCOUNT:role/IotDerDev-InstallerTempRole" --role-session-name AWSCLI-Session)
+
+
+export AWS_ACCESS_KEY_ID=$(echo $TEMP_CREDENTIALS | jq '.Credentials.AccessKeyId'| tr -d '"')
+export AWS_SECRET_ACCESS_KEY=$(echo $TEMP_CREDENTIALS | jq '.Credentials.SecretAccessKey'| tr -d '"')
+export AWS_SESSION_TOKEN=$(echo $TEMP_CREDENTIALS | jq '.Credentials.SessionToken'| tr -d '"')
+
+#Install Greengrassv2
+echo "Downloading greengrass" >> $LOG
+curl -s https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-nucleus-latest.zip > greengrass-nucleus-latest.zip && unzip greengrass-nucleus-latest.zip -d GreengrassCore
+sudo yum install java -y
+echo "Java installed now running GGv2 installation" >> $LOG
+sudo -E java -Droot="/greengrass/v2" -Dlog.store=FILE -jar ./GreengrassCore/lib/Greengrass.jar --aws-region $REGION --thing-name $THING_NAME --thing-group-name $THING_GROUP --thing-policy-name $IOT_ROLE --tes-role-name $ROLE_NAME --tes-role-alias-name $ROLE_ALIAS_NAME --component-default-user ggc_user:ggc_group --provision true --setup-system-service true --deploy-dev-tools true 
+echo "GGv2 installation completed" >> $LOG
+
+echo "Starting the simulator" >> $LOG
+diagslave -m tcp >> $SIMLOG
