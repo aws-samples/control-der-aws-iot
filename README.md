@@ -1,6 +1,6 @@
 # Control DER using AWS IoT
 
-This code is part of a Blogpost which you can find here. Please have a read the blog before exploring the example to better understand the problem and the architecture we are going to deploy.
+This code is part of a Blogpost which you can find [here](https://aws.amazon.com/blogs/industries/how-to-control-distributed-energy-resources-using-aws-iot/). Please have a read the blog before exploring the example to better understand the problem and the architecture we are going to deploy.
 
 ## Solution architecture
 
