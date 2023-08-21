@@ -36,11 +36,11 @@ The example has the following prerequisites:
 
 1.	Clone the project GitHub repository
 ```bash
-git clone https://gitlab.aws.dev/fbotton/der-control-aws-iot.git
+git clone https://github.com/aws-samples/control-der-aws-iot
 ```
 2.	Navigate into the `der-control-aws-iot/script` folder
 ```bash
-cd der-control-aws-iot/scripts
+cd der-control-aws-iot/script
 ```
 3. Set owner as non-root and give owner execute permissions for all scripts
 ```bash
