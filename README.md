@@ -40,7 +40,7 @@ git clone https://github.com/aws-samples/control-der-aws-iot
 ```
 2.	Navigate into the `der-control-aws-iot/script` folder
 ```bash
-cd der-control-aws-iot/script
+cd control-der-aws-iot/script
 ```
 3. Set owner as non-root and give owner execute permissions for all scripts
 ```bash
