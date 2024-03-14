@@ -184,7 +184,7 @@ export class ThermostatStack extends base.BaseStack {
   /* Subnet selection for the cluster, this statement selects all the private subnets of all AZs in the region */
   private getPrimarySubnets() {
 
-    let privateSubnets: ec2.SubnetSelection = { subnetType: ec2.SubnetType.PRIVATE_WITH_NAT };
+    let privateSubnets: ec2.SubnetSelection = { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS };
     return privateSubnets;
   }
 
@@ -232,10 +232,7 @@ export class ThermostatStack extends base.BaseStack {
   private getPrimaryAMI() {
 
     // Setup properties of the primary cluster AMIs
-    let primaryAMI: ec2.IMachineImage = new ec2.LookupMachineImage({
-      name: "amzn2-ami-hvm-2.0.20211001.1-x86_64-gp2",
-      windows: false
-    });
+    let primaryAMI: ec2.IMachineImage = new ec2.AmazonLinuxImage({ generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2 })
 
     return primaryAMI;
   }

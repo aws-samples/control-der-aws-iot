@@ -35,7 +35,7 @@ export class EC2CommonStack extends base.BaseStack {
       cidrMask: 24,
       name: "derms_private",
       reserved: false,
-      subnetType: ec2.SubnetType.PRIVATE_WITH_NAT
+      subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS
     };
 
     // Configuring networks to add to the VPC
@@ -43,7 +43,7 @@ export class EC2CommonStack extends base.BaseStack {
 
     /* Create VPC with the configured networks */
     let vpc: ec2.Vpc = new ec2.Vpc(this, "derms_vpc", {
-      cidr: "10.1.0.0/20",
+      ipAddresses: ec2.IpAddresses.cidr("10.1.0.0/20"),
       maxAzs: 3,
       subnetConfiguration: subnetConfigs
     });
