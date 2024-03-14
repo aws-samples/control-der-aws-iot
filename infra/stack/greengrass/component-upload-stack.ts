@@ -1,5 +1,5 @@
-import * as s3 from '@aws-cdk/aws-s3';
-import * as s3deploy from "@aws-cdk/aws-s3-deployment";
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
 
 import * as base from '../../../lib/template/stack/base/base-stack';
 import { AppContext } from '../../../lib/template/app-context';

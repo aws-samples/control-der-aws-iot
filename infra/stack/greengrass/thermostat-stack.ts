@@ -1,8 +1,8 @@
-import * as ec2 from "@aws-cdk/aws-ec2";
-import * as s3 from '@aws-cdk/aws-s3';
-import * as iam from "@aws-cdk/aws-iam";
-import * as ssm from "@aws-cdk/aws-ssm";
-import * as s3deploy from "@aws-cdk/aws-s3-deployment";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as iam from "aws-cdk-lib/aws-iam";
+import * as ssm from 'aws-cdk-lib/aws-ssm';
+import * as s3deploy from "aws-cdk-lib/aws-s3-deployment";
 import { readFileSync } from 'fs';
 
 import * as base from '../../../lib/template/stack/base/base-stack';

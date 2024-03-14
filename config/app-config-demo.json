@@ -1,5 +1,6 @@
 {
-    "Project": {
+    "Project":
+    {
         "Name": "IotDer",
         "Stage": "Dev",
         "Account": "<put-your-accountID-here>",
@@ -9,26 +10,33 @@
         "RoleName": "GGV2TokenRole",
         "IoTRole": "GGV2IoTThingPolicy"
     },
-    "Stack": {
-        "ThingInstaller": {
+    "Stack":
+    {
+        "ThingInstaller":
+        {
             "Name": "ThingInstallerStack",
             "ThingGroupName": "derms"
         },
-        "IoTCore": {
+        "IoTCore":
+        {
             "Name": "IoTCoreStack",
             "NotificationEmail": "<put-your-email-here>"
         },
-        "ComponentUpload": {
+        "ComponentUpload":
+        {
             "Name": "ComponentUploadStack",
-            "BucketPrefix": "deployment"   ,
-            "BucketName": "gg-derms-components"       
+            "BucketPrefix": "deployment",
+            "BucketName": "gg-derms-components"
         },
-        "EC2Common": {
+        "EC2Common":
+        {
             "Name": "EC2CommonStack"
         },
-        "Thermostat": {
+        "Thermostat":
+        {
             "Name": "ThermostatStack",
-            "TempCredential": {
+            "TempCredential":
+            {
                 "TempSetupRoleName": "InstallerTempRole"
             },
             "VpcName": "DermsVpc",
@@ -36,14 +44,18 @@
             "BucketPrefix": "deployment",
             "BucketName": "gg-derms-components"
         },
-        "ComponentDeployment": {
+        "ComponentDeployment":
+        {
             "Name": "ComponentDeploymentStack",
-            "PublicComponents": [
+            "PublicComponents":
+            [
                 {
                     "Name": "aws.greengrass.Nucleus",
                     "Version": "2.6.0",
-                    "ConfigurationUpdate": {
-                        "logging": {
+                    "ConfigurationUpdate":
+                    {
+                        "logging":
+                        {
                             "fileSizeKB": 1
                         }
                     }
@@ -55,33 +67,40 @@
                 {
                     "Name": "aws.greengrass.LogManager",
                     "Version": "2.2.6",
-                    "ConfigurationUpdate": {
-                        "logsUploaderConfiguration": {
-                            "systemLogsConfiguration": {
-                              "uploadToCloudWatch": "true",
-                              "minimumLogLevel": "INFO",
-                              "diskSpaceLimit": "200",
-                              "diskSpaceLimitUnit": "MB",
-                              "deleteLogFileAfterCloudUpload": "false"
+                    "ConfigurationUpdate":
+                    {
+                        "logsUploaderConfiguration":
+                        {
+                            "systemLogsConfiguration":
+                            {
+                                "uploadToCloudWatch": "true",
+                                "minimumLogLevel": "INFO",
+                                "diskSpaceLimit": "200",
+                                "diskSpaceLimitUnit": "MB",
+                                "deleteLogFileAfterCloudUpload": "true"
                             },
-                            "componentLogsConfigurationMap": {
-                                "aws.greengrass.labs.ModbusTCP": {
+                            "componentLogsConfigurationMap":
+                            {
+                                "aws.greengrass.labs.ModbusTCP":
+                                {
                                     "minimumLogLevel": "INFO",
                                     "diskSpaceLimit": "200",
                                     "diskSpaceLimitUnit": "MB",
-                                    "deleteLogFileAfterCloudUpload": "false"
+                                    "deleteLogFileAfterCloudUpload": "true"
                                 },
-                                "aws.greengrass.derms.demo.ModbusController": {
+                                "aws.greengrass.derms.demo.ModbusController":
+                                {
                                     "minimumLogLevel": "INFO",
                                     "diskSpaceLimit": "200",
                                     "diskSpaceLimitUnit": "MB",
-                                    "deleteLogFileAfterCloudUpload": "false"
+                                    "deleteLogFileAfterCloudUpload": "true"
                                 },
-                                "aws.greengrass.ShadowManager": {
+                                "aws.greengrass.ShadowManager":
+                                {
                                     "minimumLogLevel": "INFO",
                                     "diskSpaceLimit": "200",
                                     "diskSpaceLimitUnit": "MB",
-                                    "deleteLogFileAfterCloudUpload": "false"
+                                    "deleteLogFileAfterCloudUpload": "true"
                                 }
                             }
                         },
@@ -91,21 +110,27 @@
                 {
                     "Name": "aws.greengrass.ShadowManager",
                     "Version": "2.2.0",
-                    "ConfigurationUpdate": {
-                      "synchronize": {
-                        "coreThing": {
-                          "classic": true
-                        },
-                        "direction": "betweenDeviceAndCloud"
-                      }
+                    "ConfigurationUpdate":
+                    {
+                        "synchronize":
+                        {
+                            "coreThing":
+                            {
+                                "classic": true
+                            },
+                            "direction": "betweenDeviceAndCloud"
+                        }
                     }
                 },
                 {
                     "Name": "aws.greengrass.clientdevices.mqtt.Bridge",
                     "Version": "2.2.4",
-                    "ConfigurationUpdate": {
-                        "mqttTopicMapping": {
-                            "ThermostatBridge": {
+                    "ConfigurationUpdate":
+                    {
+                        "mqttTopicMapping":
+                        {
+                            "ThermostatBridge":
+                            {
                                 "topic": "thermostat/telemetry",
                                 "source": "Pubsub",
                                 "target": "IotCore"
@@ -114,41 +139,53 @@
                     }
                 }
             ],
-            "ModbusTCPAdapter": {
+            "ModbusTCPAdapter":
+            {
                 "Name": "aws.greengrass.labs.ModbusTCP",
                 "Version": "1.0.0",
                 "CodePath": "codes/component/aws.greengrass.labs.ModbusTCP",
-                "ComponentConfiguration": {
-                    "DefaultConfiguration": {
-                      "Modbus": {
-                        "Endpoints": [
-                          {
-                            "Host": "localhost",
-                            "Port": 502,
-                            "Devices": [
-                              {
-                                "Name": "thermostat",
-                                "UnitId": 0
-                              }
+                "ComponentConfiguration":
+                {
+                    "DefaultConfiguration":
+                    {
+                        "Modbus":
+                        {
+                            "Endpoints":
+                            [
+                                {
+                                    "Host": "localhost",
+                                    "Port": 502,
+                                    "Devices":
+                                    [
+                                        {
+                                            "Name": "thermostat",
+                                            "UnitId": 0
+                                        }
+                                    ]
+                                }
                             ]
-                          }
-                        ]
-                      }
+                        }
                     }
                 }
             },
-            "ModbusController": {
+            "ModbusController":
+            {
                 "Name": "aws.greengrass.derms.demo.ModbusController",
                 "Version": "1.0.0",
                 "CodePath": "codes/component/aws.greengrass.derms.demo.ModbusController",
-                "ComponentConfiguration": {
-                    "DefaultConfiguration": {
-                    "Modbus": {
-                        "Devices": [
-                          {
-                            "Name": "thermostat"
-                          }]
-                    }
+                "ComponentConfiguration":
+                {
+                    "DefaultConfiguration":
+                    {
+                        "Modbus":
+                        {
+                            "Devices":
+                            [
+                                {
+                                    "Name": "thermostat"
+                                }
+                            ]
+                        }
                     }
                 }
             }

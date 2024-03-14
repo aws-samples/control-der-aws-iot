@@ -1,6 +1,7 @@
-import * as cdk from '@aws-cdk/core';
-import * as s3 from '@aws-cdk/aws-s3';
-import * as gg2 from '@aws-cdk/aws-greengrassv2';
+import * as cdk from 'aws-cdk-lib';
+import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as gg2 from 'aws-cdk-lib/aws-greengrassv2';
+import { Construct } from 'constructs';
 
 import * as base from '../../../lib/template/construct/base/base-construct';
 
@@ -14,7 +15,7 @@ export class ModubsControllerComponent extends base.BaseConstruct {
     private compName: string;
     private thingName: string;
 
-    constructor(scope: cdk.Construct, id: string, props: ConstructProps) {
+    constructor(scope: Construct, id: string, props: ConstructProps) {
         super(scope, id, props);
 
         this.compName = `${this.projectPrefix}-${props.compConfig['Name']}`;

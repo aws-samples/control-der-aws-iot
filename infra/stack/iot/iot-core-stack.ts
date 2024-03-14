@@ -1,9 +1,8 @@
-import * as iot from '@aws-cdk/aws-iot';
-import * as cdk from '@aws-cdk/core';
-import * as sns from '@aws-cdk/aws-sns';
-import * as cr from '@aws-cdk/custom-resources';
-import * as actions from '@aws-cdk/aws-iot-actions';
-import * as iam from '@aws-cdk/aws-iam'
+import * as iot from 'aws-cdk-lib/aws-iot';
+import * as cdk from 'aws-cdk-lib';
+import * as sns from 'aws-cdk-lib/aws-sns';
+import * as cr from 'aws-cdk-lib/custom-resources';
+import * as iam from 'aws-cdk-lib/aws-iam'
 
 import * as base from '../../../lib/template/stack/base/base-stack';
 import { AppContext } from '../../../lib/template/app-context';
@@ -54,14 +53,19 @@ export class IoTCoreStack extends base.BaseStack {
 
     let topicRole = this.createIoTRuleRole(topic)
   
-    new iot.TopicRule(this, 'TopicRule', {
-          topicRuleName: 'shadow_status_monitoring', // optional
-          description: 'Checks the thermostat status and send a notification on its change', // optional
-          sql: iot.IotSql.fromStringAsVer20160323(sql_query),
-          actions: [new actions.SnsTopicAction(topic, {
-            messageFormat: actions.SnsActionMessageFormat.RAW,
-            role: topicRole
-          })]
-      });
+    new iot.CfnTopicRule(this, 'TopicRule', 
+    {
+      topicRulePayload: {
+          actions: [{ 
+              sns: {
+                targetArn: topic.topicArn,
+                messageFormat: "RAW",
+                roleArn: topicRole.roleArn
+              }
+          }],
+          sql: sql_query,
+      }
+    }
+    );
   }
 }

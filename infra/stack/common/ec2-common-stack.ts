@@ -1,5 +1,5 @@
-import * as ec2 from "@aws-cdk/aws-ec2";
-import * as s3 from '@aws-cdk/aws-s3';
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import * as s3 from 'aws-cdk-lib/aws-s3';
 
 import * as base from '../../../lib/template/stack/base/base-stack';
 import { AppContext } from '../../../lib/template/app-context';
